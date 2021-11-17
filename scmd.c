@@ -108,9 +108,9 @@ int main(int ac, char **av)
 	char *out;	
 	size_t outlen;
 	if (mode == uncompress) {
-		err = snappy_uncompressed_length(map, size, &outlen);
+		err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length(map, size, &outlen);
 	} else {	
-		outlen = snappy_max_compressed_length(size);
+		outlen = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(size);
 	}
 	
 	out = xmalloc(outlen);
@@ -118,9 +118,9 @@ int main(int ac, char **av)
 	struct snappy_env env;
 	if (mode == compress) {
 		snappy_init_env(&env);
-		err = snappy_compress(&env, map, size, out, &outlen);
+		err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress(&env, map, size, out, &outlen);
 	} else
-		err = snappy_uncompress(map, size, out);
+		err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(map, size, out);
 
 	if (mode == compress) {
 		snappy_free_env(&env);

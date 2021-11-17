@@ -530,11 +530,11 @@ static inline u32 hash(const char *p, int shift)
  *
  * This last factor dominates the blowup, so the final estimate is:
  */
-size_t snappy_max_compressed_length(size_t source_len)
+size_t SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(size_t source_len)
 {
 	return 32 + source_len + source_len / 6;
 }
-EXPORT_SYMBOL(snappy_max_compressed_length);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length);
 
 enum {
 	LITERAL = 0,
@@ -635,14 +635,14 @@ static inline char *emit_copy(char *op, int offset, int len)
 }
 
 /**
- * snappy_uncompressed_length - return length of uncompressed output.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length - return length of uncompressed output.
  * @start: compressed buffer
  * @n: length of compressed buffer.
  * @result: Write the length of the uncompressed output here.
  *
  * Returns true when successfull, otherwise false.
  */
-bool snappy_uncompressed_length(const char *start, size_t n, size_t * result)
+bool SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length(const char *start, size_t n, size_t * result)
 {
 	u32 v = 0;
 	const char *limit = start + n;
@@ -653,7 +653,7 @@ bool snappy_uncompressed_length(const char *start, size_t n, size_t * result)
 		return false;
 	}
 }
-EXPORT_SYMBOL(snappy_uncompressed_length);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length);
 
 /*
  * The size of a compression block. Note that many parts of the compression
@@ -1354,7 +1354,7 @@ static inline int compress(struct snappy_env *env, struct source *reader,
 
 		/* Compress input_fragment and append to dest */
 		char *dest;
-		dest = sink_peek(writer, snappy_max_compressed_length(num_to_read));
+		dest = sink_peek(writer, SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(num_to_read));
 		if (!dest) {
 			/*
 			 * Need a scratch buffer for the output,
@@ -1407,7 +1407,7 @@ int snappy_compress_iov(struct snappy_env *env,
 EXPORT_SYMBOL(snappy_compress_iov);
 
 /**
- * snappy_compress - Compress a buffer using the snappy compressor.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress - Compress a buffer using the snappy compressor.
  * @env: Preallocated environment
  * @input: Input buffer
  * @input_length: Length of input_buffer
@@ -1417,13 +1417,13 @@ EXPORT_SYMBOL(snappy_compress_iov);
  * Return 0 on success, otherwise an negative error code.
  *
  * The output buffer must be at least
- * snappy_max_compressed_length(input_length) bytes long.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(input_length) bytes long.
  *
  * Requires a preallocated environment from snappy_init_env.
  * The environment does not keep state over individual calls
  * of this function, just preallocates the memory.
  */
-int snappy_compress(struct snappy_env *env,
+int SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress(struct snappy_env *env,
 		    const char *input,
 		    size_t input_length,
 		    char *compressed, size_t *compressed_length)
@@ -1441,7 +1441,7 @@ int snappy_compress(struct snappy_env *env,
 				   &iov_in, 1, input_length, 
 				   &iov_out, &out, compressed_length);
 }
-EXPORT_SYMBOL(snappy_compress);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress);
 
 int snappy_uncompress_iov(struct iovec *iov_in, int iov_in_len,
 			   size_t input_len, char *uncompressed)
@@ -1460,29 +1460,29 @@ int snappy_uncompress_iov(struct iovec *iov_in, int iov_in_len,
 EXPORT_SYMBOL(snappy_uncompress_iov);
 
 /**
- * snappy_uncompress - Uncompress a snappy compressed buffer
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress - Uncompress a snappy compressed buffer
  * @compressed: Input buffer with compressed data
  * @n: length of compressed buffer
  * @uncompressed: buffer for uncompressed data
  *
  * The uncompressed data buffer must be at least
- * snappy_uncompressed_length(compressed) bytes long.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length(compressed) bytes long.
  *
  * Return 0 on success, otherwise an negative error code.
  */
-int snappy_uncompress(const char *compressed, size_t n, char *uncompressed)
+int SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(const char *compressed, size_t n, char *uncompressed)
 {
 	struct iovec iov = {
 		.iov_base = (char *)compressed,
 		.iov_len = n
 	};
-	return snappy_uncompress_iov(&iov, 1, n, uncompressed);
+	return SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress_iov(&iov, 1, n, uncompressed);
 }
-EXPORT_SYMBOL(snappy_uncompress);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress);
 
 #else
 /**
- * snappy_compress - Compress a buffer using the snappy compressor.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress - Compress a buffer using the snappy compressor.
  * @env: Preallocated environment
  * @input: Input buffer
  * @input_length: Length of input_buffer
@@ -1492,13 +1492,13 @@ EXPORT_SYMBOL(snappy_uncompress);
  * Return 0 on success, otherwise an negative error code.
  *
  * The output buffer must be at least
- * snappy_max_compressed_length(input_length) bytes long.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(input_length) bytes long.
  *
  * Requires a preallocated environment from snappy_init_env.
  * The environment does not keep state over individual calls
  * of this function, just preallocates the memory.
  */
-int snappy_compress(struct snappy_env *env,
+int SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress(struct snappy_env *env,
 		    const char *input,
 		    size_t input_length,
 		    char *compressed, size_t *compressed_length)
@@ -1516,20 +1516,20 @@ int snappy_compress(struct snappy_env *env,
 	*compressed_length = (writer.dest - compressed);
 	return err;
 }
-EXPORT_SYMBOL(snappy_compress);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress);
 
 /**
- * snappy_uncompress - Uncompress a snappy compressed buffer
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress - Uncompress a snappy compressed buffer
  * @compressed: Input buffer with compressed data
  * @n: length of compressed buffer
  * @uncompressed: buffer for uncompressed data
  *
  * The uncompressed data buffer must be at least
- * snappy_uncompressed_length(compressed) bytes long.
+ * SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompressed_length(compressed) bytes long.
  *
  * Return 0 on success, otherwise an negative error code.
  */
-int snappy_uncompress(const char *compressed, size_t n, char *uncompressed)
+int SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(const char *compressed, size_t n, char *uncompressed)
 {
 	struct source reader = {
 		.ptr = compressed,
@@ -1541,7 +1541,7 @@ int snappy_uncompress(const char *compressed, size_t n, char *uncompressed)
 	};
 	return internal_uncompress(&reader, &output, 0xffffffff);
 }
-EXPORT_SYMBOL(snappy_uncompress);
+EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress);
 #endif
 
 static inline void clear_env(struct snappy_env *env)
@@ -1570,7 +1570,7 @@ int snappy_init_env_sg(struct snappy_env *env, bool sg)
 		if (!env->scratch)
 			goto error;
 		env->scratch_output =
-			vmalloc(snappy_max_compressed_length(kblock_size));
+			vmalloc(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(kblock_size));
 		if (!env->scratch_output)
 			goto error;
 	}

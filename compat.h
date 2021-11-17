@@ -15,7 +15,7 @@
 
 
 #elif !defined(__WIN32__)
-#  include <endian.h>
+//#  include <endian.h>
 #endif
 
 #include <stdlib.h>
@@ -25,7 +25,8 @@
 #include <stdbool.h>
 #include <limits.h>
 #ifndef __WIN32__
-#include <sys/uio.h>
+//#include <sys/uio.h>
+#include <sys/types.h>
 #endif
 
 #ifdef __ANDROID__

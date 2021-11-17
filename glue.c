@@ -18,18 +18,18 @@
 
 static inline int c_snappy(char *map, size_t size, char *out, size_t *outlen, void *a)
 {
-	return snappy_compress((struct snappy_env *)a, map, size, out, outlen);
+	return SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress((struct snappy_env *)a, map, size, out, outlen);
 }
 
 static inline int d_snappy(char *out, size_t outlen, char *buf2, size_t size, void *a)
 {
-	return snappy_uncompress(out, outlen, buf2);
+	return SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(out, outlen, buf2);
 }
 
 void test_snappy(char *map, size_t size, char *fn)
 {
 	int i;
-	size_t outlen = snappy_max_compressed_length(size);
+	size_t outlen = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(size);
 	int err;       
 	char *out = xmalloc(outlen);
 	char *buf2 = xmalloc(size);
@@ -305,7 +305,7 @@ static inline int d_snapref(char *out, size_t outlen, char *buf2, size_t size, v
 void test_snapref(char *map, size_t size, char *fn)
 {
 	int i;
-	size_t outlen = snappy_max_compressed_length(size);
+	size_t outlen = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(size);
 	int err;       
 	char *out = xmalloc(outlen);
 	char *buf2 = xmalloc(size);

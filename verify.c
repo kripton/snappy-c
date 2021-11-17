@@ -31,16 +31,16 @@ int main(int ac, char **av)
 
 		size_t outlen;
 		int err;       
-		char *out = xmalloc(snappy_max_compressed_length(size));
+		char *out = xmalloc(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_max_compressed_length(size));
 		char *buf2 = xmalloc(size);
 
-		err = snappy_compress(&env, map, size, out, &outlen);		
+		err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress(&env, map, size, out, &outlen);		
 		if (err) {
 			failed = 1;
 			printf("compression of %s failed: %d\n", *av, err);
 			goto next;
 		}
-		err = snappy_uncompress(out, outlen, buf2);
+		err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(out, outlen, buf2);
 
 		if (err) {
 			failed = 1;
