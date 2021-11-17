@@ -150,7 +150,7 @@ int main(int ac, char **av)
 
 			size_t outlen;
 		
-			err = SNAPPYC_FUNCTION_NAME_PREFIXsnappy_compress_iov(&env, in_iov, iv, st_size, 
+			err = snappy_compress_iov(&env, in_iov, iv, st_size, 
 						      out_iov, &ov, &outlen);
 			if (err < 0) 
 				printf("compression of %s failed: %s\n", *av, strerror(-err));

@@ -1476,7 +1476,7 @@ int SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress(const char *compressed, size_t
 		.iov_base = (char *)compressed,
 		.iov_len = n
 	};
-	return SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress_iov(&iov, 1, n, uncompressed);
+	return snappy_uncompress_iov(&iov, 1, n, uncompressed);
 }
 EXPORT_SYMBOL(SNAPPYC_FUNCTION_NAME_PREFIXsnappy_uncompress);
 
