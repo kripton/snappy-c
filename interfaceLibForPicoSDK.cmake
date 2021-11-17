@@ -8,7 +8,6 @@ add_library(snappyc INTERFACE)
 
 target_sources(snappyc INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/glue.c
-    ${CMAKE_CURRENT_LIST_DIR}/map.c
     ${CMAKE_CURRENT_LIST_DIR}/snappy.c
     ${CMAKE_CURRENT_LIST_DIR}/util.c
 )
